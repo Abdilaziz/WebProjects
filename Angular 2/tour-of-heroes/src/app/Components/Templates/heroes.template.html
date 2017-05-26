@@ -1,0 +1,36 @@
+<!-- onSelect is a AppComponent Method -->
+<!-- Master (This UI pattern is called master/detail) --> <!-- if (hero === selectedHero) true, angular adds the selected class, which has css tied to it -->
+<h2>My Heroes</h2>
+
+<div>
+  <label>Hero name:</label> <input #heroName />
+  <button (click)="add(heroName.value); heroName.value=''">
+    Add
+  </button>
+</div>
+
+
+<ul class="heroes">
+  	<li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+	  	<span class="badge">{{hero.id}}</span> 
+	  	<span>{{hero.name}}</span>
+	  	<button class="delete"
+      		(click)="delete(hero); $event.stopPropagation()">x
+      </button>
+  	</li>
+</ul>
+
+<!--  Binding the info that is displayed in the details page like this needs to be changed so that we can go to the details page   -->
+
+<!-- <hero-detail [hero]="selectedHero"></hero-detail> -->
+
+
+<!-- mini details page will be gone to when the element is clicked on -->
+
+<div *ngIf="selectedHero">
+  <h2>
+    {{selectedHero.name | uppercase}} is my hero
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
+
